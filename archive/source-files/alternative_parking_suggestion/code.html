@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alternative Parking Suggestion</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-gray-100">
+<div class="relative flex h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark">
+<!-- Background Map Layer -->
+<div class="absolute inset-0 z-0">
+<div class="h-full w-full bg-cover bg-center" data-alt="Modern dark city map of Singapore showing navigation route" data-location="Singapore" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDV_nvJUcilLMRKtCKBbAiNO3lBVGvtz6R5I6bOPpB6mVieYsZYil4_j8ePlNlKd79lJqGK2iecwgz7uSKPOYyaS076hHM6CIsGmbaJKSjaYfSKQ-1-rZpOzAxfZuK1ZCHHn0n0D5Izw73PtzSrr278aiNZcw6cufE_EDpWfl_o_9E9PqJZuIf_rr4J0wmUsQxvpf7nTTZWkx3D-QtiF4osQtiLmqFNlx5LI-icaDPWRGk26lwdNwxw0CiO8H84wMZH8CBjsb8tz0lE');">
+</div>
+<!-- Overlay to dim map when notification appears -->
+<div class="absolute inset-0 bg-black/40"></div>
+</div>
+<!-- Map UI Elements (Status Bar & Search) -->
+<div class="relative z-10 p-4 flex flex-col gap-4">
+<div class="flex items-center justify-between w-full">
+<div class="bg-background-dark/80 backdrop-blur-md p-2 rounded-xl flex items-center gap-2 border border-white/10 shadow-xl">
+<span class="material-symbols-outlined text-primary">navigation</span>
+<span class="text-sm font-semibold text-white">Navigating to Market St</span>
+</div>
+<div class="flex gap-2">
+<button class="bg-background-dark/80 backdrop-blur-md p-3 rounded-xl border border-white/10 shadow-xl">
+<span class="material-symbols-outlined text-white">volume_up</span>
+</button>
+<button class="bg-background-dark/80 backdrop-blur-md p-3 rounded-xl border border-white/10 shadow-xl">
+<span class="material-symbols-outlined text-white">settings</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Re-recommendation Bottom Sheet -->
+<div class="absolute bottom-0 left-0 right-0 z-20 flex flex-col items-stretch bg-background-light dark:bg-background-dark rounded-t-xl shadow-[0_-10px_30px_rgba(0,0,0,0.5)] border-t border-white/10">
+<!-- Handle -->
+<div class="flex h-6 w-full items-center justify-center">
+<div class="h-1.5 w-12 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+</div>
+<!-- Header Section -->
+<div class="px-6 pb-2 pt-2">
+<div class="flex items-center gap-2 text-primary mb-1">
+<span class="material-symbols-outlined text-[20px] font-bold">warning</span>
+<span class="text-xs font-bold uppercase tracking-wider">Availability Update</span>
+</div>
+<h3 class="text-gray-900 dark:text-white tracking-tight text-2xl font-bold leading-tight">Better Parking Options Nearby</h3>
+<p class="text-gray-600 dark:text-gray-400 text-sm font-normal leading-normal mt-1">
+                    Current destination carpark availability dropped. We found 2 better alternatives.
+                </p>
+</div>
+<!-- Alternative List -->
+<div class="px-4 py-4 space-y-3">
+<!-- Option 1: Selected/Recommended -->
+<div class="group relative flex items-center gap-4 bg-primary/10 dark:bg-primary/20 border-2 border-primary p-4 rounded-xl transition-all">
+<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined">local_parking</span>
+</div>
+<div class="flex flex-1 flex-col justify-center">
+<div class="flex justify-between items-start">
+<p class="text-gray-900 dark:text-white text-base font-bold leading-none mb-1">Wilson Parking (Market St)</p>
+<span class="text-xs font-bold bg-green-500/20 text-green-500 px-2 py-0.5 rounded-full border border-green-500/30">FASTEST</span>
+</div>
+<p class="text-gray-600 dark:text-gray-400 text-xs font-medium">400m away • <span class="text-green-500 font-bold">45 lots available</span></p>
+</div>
+<div class="shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary fill-1">check_circle</span>
+</div>
+</div>
+<!-- Option 2 -->
+<div class="flex items-center gap-4 bg-gray-100 dark:bg-white/5 border border-transparent p-4 rounded-xl hover:bg-gray-200 dark:hover:bg-white/10 transition-all">
+<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-gray-300 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
+<span class="material-symbols-outlined">local_parking</span>
+</div>
+<div class="flex flex-1 flex-col justify-center">
+<p class="text-gray-900 dark:text-white text-base font-bold leading-none mb-1">CapitaSpring Carpark</p>
+<p class="text-gray-600 dark:text-gray-400 text-xs font-medium">650m away • <span class="text-green-500 font-bold">120 lots available</span></p>
+</div>
+<div class="shrink-0">
+<div class="w-5 h-5 rounded-full border-2 border-gray-400 dark:border-gray-600"></div>
+</div>
+</div>
+</div>
+<!-- Action Buttons Footer -->
+<div class="px-4 pb-10 pt-2 flex flex-col gap-3">
+<button class="flex h-14 w-full items-center justify-center rounded-xl bg-primary text-white font-bold text-lg shadow-lg shadow-primary/30 active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined mr-2">directions_car</span>
+                    Switch Route
+                </button>
+<button class="flex h-12 w-full items-center justify-center rounded-xl bg-transparent text-gray-500 dark:text-gray-400 font-semibold text-base hover:bg-gray-100 dark:hover:bg-white/5">
+                    Ignore &amp; Keep Original
+                </button>
+</div>
+<!-- Safe Area Bottom Bar (iOS style) -->
+<div class="h-2 bg-background-light dark:bg-background-dark"></div>
+</div>
+<!-- Floating Side Controls (Right) -->
+<div class="absolute bottom-[440px] right-4 flex flex-col gap-3 z-10">
+<div class="flex flex-col rounded-xl overflow-hidden shadow-2xl border border-white/10">
+<button class="flex h-12 w-12 items-center justify-center bg-background-dark/80 backdrop-blur-md text-white border-b border-white/10">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="flex h-12 w-12 items-center justify-center bg-background-dark/80 backdrop-blur-md text-white">
+<span class="material-symbols-outlined">remove</span>
+</button>
+</div>
+<button class="flex h-12 w-12 items-center justify-center rounded-xl bg-background-dark/80 backdrop-blur-md text-primary shadow-2xl border border-white/10">
+<span class="material-symbols-outlined fill-1">near_me</span>
+</button>
+</div>
+</div>
+</body></html>

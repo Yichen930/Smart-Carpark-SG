@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Parking Results Map &amp; List</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: "Public Sans", sans-serif;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white transition-colors duration-300">
+<div class="relative flex flex-col h-screen w-full max-w-md mx-auto overflow-hidden shadow-2xl border-x border-slate-200 dark:border-slate-800">
+<header class="sticky top-0 z-50 flex items-center bg-background-light dark:bg-background-dark p-4 border-b border-slate-200 dark:border-slate-800 justify-between">
+<div class="flex items-center gap-2">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold leading-tight tracking-tight">Orchard Road</h1>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+</header>
+<main class="flex flex-col flex-1 overflow-hidden">
+<section class="relative h-2/5 shrink-0">
+<div class="w-full h-full bg-slate-300 dark:bg-slate-700 relative overflow-hidden">
+<div class="absolute inset-0 bg-center bg-cover" data-alt="Singapore dark mode city map view" data-location="Singapore" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDV_nvJUcilLMRKtCKBbAiNO3lBVGvtz6R5I6bOPpB6mVieYsZYil4_j8ePlNlKd79lJqGK2iecwgz7uSKPOYyaS076hHM6CIsGmbaJKSjaYfSKQ-1-rZpOzAxfZuK1ZCHHn0n0D5Izw73PtzSrr278aiNZcw6cufE_EDpWfl_o_9E9PqJZuIf_rr4J0wmUsQxvpf7nTTZWkx3D-QtiF4osQtiLmqFNlx5LI-icaDPWRGk26lwdNwxw0CiO8H84wMZH8CBjsb8tz0lE");'></div>
+<div class="absolute top-[45%] left-[48%]">
+<div class="relative group cursor-pointer">
+<div class="bg-emerald-500 text-white rounded-full px-2 py-1 text-xs font-bold shadow-lg border-2 border-white dark:border-background-dark">45</div>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-emerald-500"></div>
+</div>
+</div>
+<div class="absolute top-1/2 left-2/3">
+<div class="relative group cursor-pointer">
+<div class="bg-amber-500 text-white rounded-full px-2 py-1 text-xs font-bold shadow-lg border-2 border-white dark:border-background-dark">12</div>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-amber-500"></div>
+</div>
+</div>
+<div class="absolute bottom-1/4 left-1/2">
+<div class="relative group cursor-pointer scale-110 ring-4 ring-primary/30 rounded-full">
+<div class="bg-rose-500 text-white rounded-full px-2 py-1 text-xs font-bold shadow-lg border-2 border-white dark:border-background-dark">2</div>
+<div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-rose-500"></div>
+</div>
+</div>
+<div class="absolute bottom-4 right-4 flex flex-col gap-2">
+<button class="flex items-center justify-center size-10 rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-white shadow-lg">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+<button class="flex items-center justify-center size-10 rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-white shadow-lg">
+<span class="material-symbols-outlined">layers</span>
+</button>
+</div>
+</div>
+</section>
+<div class="bg-background-light dark:bg-background-dark border-y border-slate-200 dark:border-slate-800 px-4 py-3 flex gap-2 overflow-x-auto hide-scrollbar z-20">
+<button class="flex h-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-white px-4 text-sm font-semibold">
+<span class="material-symbols-outlined text-sm">near_me</span> Distance
+                    <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-2 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-4 text-sm font-semibold">
+                    Availability
+                    <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-2 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-4 text-sm font-semibold">
+                    Cost
+                    <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+<section class="flex-1 overflow-y-auto p-4 space-y-4 bg-background-light dark:bg-background-dark">
+<div class="flex items-center justify-between mb-2">
+<h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Top Recommendations</h2>
+<span class="text-xs text-primary font-bold">5 locations found</span>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 p-4 transition-transform active:scale-[0.98]">
+<div class="flex justify-between items-start mb-3">
+<div class="flex-1">
+<h3 class="text-lg font-bold leading-none mb-1">Orchard Central Carpark</h3>
+<div class="flex items-center gap-2 text-slate-500 text-sm">
+<span class="material-symbols-outlined text-sm">directions_car</span>
+<span>0.4 km away • Level 5 &amp; 6</span>
+</div>
+</div>
+<div class="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 px-2 py-1 rounded text-xs font-bold">
+                            RECOMMENDED
+                        </div>
+</div>
+<div class="grid grid-cols-3 gap-2 py-3 border-y border-slate-100 dark:border-slate-800">
+<div class="text-center">
+<p class="text-xs text-slate-500 mb-0.5">Available</p>
+<p class="text-sm font-bold text-emerald-500">45/200</p>
+</div>
+<div class="text-center border-x border-slate-100 dark:border-slate-800">
+<p class="text-xs text-slate-500 mb-0.5">Rate</p>
+<p class="text-sm font-bold">S$2.40/hr</p>
+</div>
+<div class="text-center">
+<p class="text-xs text-slate-500 mb-0.5">Weather</p>
+<div class="flex items-center justify-center gap-1 text-amber-500">
+<span class="material-symbols-outlined text-lg">wb_sunny</span>
+<span class="text-sm font-bold">Sunny</span>
+</div>
+</div>
+</div>
+<div class="mt-4">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-xs font-semibold text-slate-500">Smart Score</span>
+<span class="text-xs font-bold text-primary">9.8/10</span>
+</div>
+<div class="flex gap-1 h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="bg-primary w-4/5 rounded-full"></div>
+<div class="bg-primary w-1/5 rounded-full opacity-30"></div>
+</div>
+</div>
+<div class="flex gap-2 mt-5">
+<button class="flex-1 bg-primary text-white font-bold h-11 rounded-lg hover:brightness-110 transition-all flex items-center justify-center gap-2">
+                            Select
+                        </button>
+<button class="flex-1 border border-primary text-primary dark:border-primary/50 dark:text-primary font-bold h-11 rounded-lg hover:bg-primary/5 transition-all flex items-center justify-center gap-2">
+                            View Details
+                        </button>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 p-4 transition-transform active:scale-[0.98]">
+<div class="flex justify-between items-start mb-3">
+<div class="flex-1">
+<h3 class="text-lg font-bold leading-none mb-1">313@Somerset Parking</h3>
+<div class="flex items-center gap-2 text-slate-500 text-sm">
+<span class="material-symbols-outlined text-sm">directions_car</span>
+<span>0.6 km away • Basement 3</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 py-3 border-y border-slate-100 dark:border-slate-800">
+<div class="text-center">
+<p class="text-xs text-slate-500 mb-0.5">Available</p>
+<p class="text-sm font-bold text-amber-500">12/150</p>
+</div>
+<div class="text-center border-x border-slate-100 dark:border-slate-800">
+<p class="text-xs text-slate-500 mb-0.5">Rate</p>
+<p class="text-sm font-bold">S$2.80/hr</p>
+</div>
+<div class="text-center">
+<p class="text-xs text-slate-500 mb-0.5">Weather</p>
+<div class="flex items-center justify-center gap-1 text-slate-400">
+<span class="material-symbols-outlined text-lg">cloud</span>
+<span class="text-sm font-bold">Cloudy</span>
+</div>
+</div>
+</div>
+<div class="mt-4">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-xs font-semibold text-slate-500">Smart Score</span>
+<span class="text-xs font-bold text-slate-500">7.2/10</span>
+</div>
+<div class="flex gap-1 h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="bg-primary w-[72%] rounded-full"></div>
+</div>
+</div>
+<div class="flex gap-2 mt-5">
+<button class="flex-1 bg-primary text-white font-bold h-11 rounded-lg hover:brightness-110 transition-all">
+                            Select
+                        </button>
+<button class="flex-1 border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-bold h-11 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                            View Details
+                        </button>
+</div>
+</div>
+<div class="h-10"></div>
+</section>
+</main>
+<nav class="bg-background-light dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 px-6 py-2 flex justify-between items-center shrink-0">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined">map</span>
+<span class="text-[10px] font-bold">Explore</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">bookmarks</span>
+<span class="text-[10px] font-bold">Saved</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-bold">Trends</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold">Profile</span>
+</button>
+</nav>
+<div class="bg-background-light dark:bg-background-dark flex justify-center pb-1">
+<div class="w-32 h-1 bg-slate-300 dark:bg-slate-800 rounded-full mt-2 mb-1"></div>
+</div>
+</div>
+
+</body></html>

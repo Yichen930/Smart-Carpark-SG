@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Carpark Details - Smart Carpark SG</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#137fec",
+                    "background-light": "#f6f7f8",
+                    "background-dark": "#101922",
+                },
+                fontFamily: {
+                    "display": ["Public Sans", "sans-serif"]
+                },
+                borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+        },
+    }
+</script>
+<style>
+    body {
+        font-family: 'Public Sans', sans-serif;
+        -webkit-tap-highlight-color: transparent;
+    }
+    body {
+        min-height: max(884px, 100dvh);
+    }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-4 flex items-center justify-between border-b border-slate-200 dark:border-slate-800">
+    <button onclick="history.back()" class="flex items-center justify-center size-10 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+        <span class="material-symbols-outlined">arrow_back_ios_new</span>
+    </button>
+    <h1 id="carparkName" class="text-lg font-bold tracking-tight text-center flex-1">Orchard Central Carpark</h1>
+    <button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+        <span class="material-symbols-outlined">share</span>
+    </button>
+</header>
+
+<main class="flex-1 overflow-y-auto px-4 py-4 space-y-6">
+<!-- Mini-Map Preview Section -->
+<section class="relative">
+    <div class="w-full h-48 rounded-xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-800 bg-slate-200 dark:bg-slate-800 relative group">
+        <img alt="Top down map view" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjT-EnWHpNB7ECu9nQCDZNChruK_ruLy6k02KeyaFj7IW6pRos_zXygCZGX51-bZ5kiJM5_Gt8BXeJBxjm_19yTD75mVZYkJrR2kXhI6UQ6P_ijswdMDounIWwA0iKBEapw0RCQcwDGuv8fn9G6frLXH8T5SaqODPBhjQCd7XdGAvfUQvyjIYU2QuXsN2SYu0pty7PDnmCkfCnwjMDmKUa_399cnnDiYxwzLM87RlNV4x1ADB8gN1ux_o2A4Fp6-_UvaTwiCaEBUsP"/>
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="bg-primary text-white p-2 rounded-full shadow-2xl animate-pulse">
+                <span class="material-symbols-outlined text-3xl">location_on</span>
+            </div>
+        </div>
+        <div class="absolute bottom-2 right-2 bg-white/90 dark:bg-slate-900/90 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">
+            Interactive Map
+        </div>
+    </div>
+</section>
+
+<!-- Availability Dashboard -->
+<section class="grid grid-cols-2 gap-4">
+    <div class="bg-primary/10 border border-primary/20 rounded-xl p-5 flex flex-col items-center justify-center text-center">
+        <p class="text-xs font-semibold uppercase tracking-wider text-primary mb-1">Available Lots</p>
+        <p id="availableLots" class="text-4xl font-extrabold text-primary">45</p>
+        <div class="flex items-center gap-1 mt-1 text-green-500 text-xs font-medium">
+            <span class="material-symbols-outlined text-sm">trending_up</span>
+            <span>Fairly Quiet</span>
+        </div>
+    </div>
+    <div class="bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl p-5 flex flex-col items-center justify-center text-center">
+        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Total Capacity</p>
+        <p id="totalCapacity" class="text-4xl font-extrabold">200</p>
+        <p id="lastUpdated" class="text-xs text-slate-400 mt-1 italic">Updated 2m ago</p>
+    </div>
+</section>
+
+<!-- Information List -->
+<section class="bg-white dark:bg-slate-800/30 rounded-xl border border-slate-200 dark:border-slate-800 divide-y divide-slate-200 dark:divide-slate-800">
+    <div class="px-4 py-4 flex items-start gap-4">
+        <div class="bg-slate-100 dark:bg-slate-700/50 p-2 rounded-lg">
+            <span class="material-symbols-outlined text-slate-500">pin_drop</span>
+        </div>
+        <div class="flex-1">
+            <p class="text-xs font-medium text-slate-400 uppercase tracking-tighter mb-0.5">Address</p>
+            <p id="address" class="text-sm font-semibold">181 Orchard Rd, Singapore 238896</p>
+            <p id="distance" class="text-xs text-primary mt-1 font-medium">1.2 km away</p>
+        </div>
+    </div>
+    <div class="px-4 py-4 flex items-start gap-4">
+        <div class="bg-slate-100 dark:bg-slate-700/50 p-2 rounded-lg">
+            <span class="material-symbols-outlined text-slate-500">payments</span>
+        </div>
+        <div class="flex-1">
+            <p class="text-xs font-medium text-slate-400 uppercase tracking-tighter mb-0.5">Cost</p>
+            <p id="cost" class="text-sm font-semibold">S$2.40 / hour</p>
+        </div>
+    </div>
+    <div class="grid grid-cols-2 divide-x divide-slate-200 dark:divide-slate-800">
+        <div class="px-4 py-4 flex items-start gap-4">
+            <div class="bg-slate-100 dark:bg-slate-700/50 p-2 rounded-lg">
+                <span class="material-symbols-outlined text-slate-500">garage_home</span>
+            </div>
+            <div>
+                <p class="text-xs font-medium text-slate-400 uppercase tracking-tighter mb-0.5">Type</p>
+                <p id="type" class="text-sm font-semibold">Sheltered</p>
+            </div>
+        </div>
+        <div class="px-4 py-4 flex items-start gap-4 pl-6">
+            <div class="bg-slate-100 dark:bg-slate-700/50 p-2 rounded-lg">
+                <span class="material-symbols-outlined text-slate-500">priority_high</span>
+            </div>
+            <div>
+                <p class="text-xs font-medium text-slate-400 uppercase tracking-tighter mb-0.5">Restrictions</p>
+                <p id="restrictions" class="text-sm font-semibold text-green-500">None</p>
+            </div>
+        </div>
+    </div>
+    <div class="px-4 py-4 flex items-start gap-4">
+        <div class="bg-amber-100/50 dark:bg-amber-900/20 p-2 rounded-lg">
+            <span class="material-symbols-outlined text-amber-500">light_mode</span>
+        </div>
+        <div class="flex-1">
+            <p class="text-xs font-medium text-slate-400 uppercase tracking-tighter mb-0.5">Weather State</p>
+            <div class="flex items-center gap-2">
+                <p id="weather" class="text-sm font-semibold">Sunny</p>
+                <span id="temperature" class="text-xs text-slate-500">• 32°C</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Placeholder for scroll buffer -->
+<div class="h-10"></div>
+</main>
+
+<!-- Sticky Bottom Actions -->
+<footer class="sticky bottom-0 bg-background-light dark:bg-background-dark p-4 pb-8 space-y-3 border-t border-slate-200 dark:border-slate-800">
+    <button id="startRouteBtn" class="w-full bg-[#10b981] hover:bg-[#059669] text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 transition-all active:scale-[0.98]">
+        <span class="material-symbols-outlined">navigation</span>
+        Start Route
+    </button>
+    <button onclick="history.back()" class="w-full bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all active:scale-[0.98]">
+        <span class="material-symbols-outlined">close</span>
+        Back
+    </button>
+</footer>
+
+<script src="js/app.js"></script>
+<script src="js/mockData.js"></script>
+<script>
+    // Load carpark data
+    const carparkData = JSON.parse(sessionStorage.getItem('selectedCarpark') || '{}');
+    
+    if (Object.keys(carparkData).length === 0) {
+        // Default to first carpark if none selected
+        const defaultCarpark = mockCarparks[0];
+        Object.assign(carparkData, defaultCarpark);
+    }
+    
+    // Populate page
+    document.getElementById('carparkName').textContent = carparkData.name || 'Orchard Central Carpark';
+    document.getElementById('availableLots').textContent = carparkData.availableLots || 45;
+    document.getElementById('totalCapacity').textContent = carparkData.lotCount || 200;
+    document.getElementById('lastUpdated').textContent = `Updated ${carparkData.lastUpdated || '2m ago'}`;
+    document.getElementById('address').textContent = carparkData.address || '181 Orchard Rd, Singapore 238896';
+    document.getElementById('distance').textContent = `${formatDistance(carparkData.distance || 1.2)} away`;
+    document.getElementById('cost').textContent = carparkData.cost > 0 ? `S$${carparkData.cost.toFixed(2)} / hour` : 'Free';
+    document.getElementById('type').textContent = carparkData.type || 'Sheltered';
+    document.getElementById('restrictions').textContent = carparkData.restrictions || 'None';
+    document.getElementById('weather').textContent = carparkData.weather || 'Sunny';
+    document.getElementById('temperature').textContent = `• ${carparkData.temperature || 32}°C`;
+    
+    // Start route button
+    document.getElementById('startRouteBtn').addEventListener('click', function() {
+        sessionStorage.setItem('selectedCarpark', JSON.stringify(carparkData));
+        App.simulateRoute(carparkData.id);
+        App.navigateTo('navigation.html');
+    });
+</script>
+</body>
+</html>

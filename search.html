@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Search Destination - Smart Carpark SG</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#137fec",
+                    "background-light": "#f6f7f8",
+                    "background-dark": "#101922",
+                },
+                fontFamily: {
+                    "display": ["Public Sans", "sans-serif"]
+                },
+                borderRadius: {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+                },
+            },
+        },
+    }
+</script>
+<style>
+    body {
+        font-family: 'Public Sans', sans-serif;
+    }
+    input[type='range']::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 24px;
+        height: 24px;
+        background: #137fec;
+        cursor: pointer;
+        border-radius: 50%;
+        border: 2px solid white;
+    }
+    body {
+        min-height: max(884px, 100dvh);
+    }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col font-display">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-primary text-white px-4 py-4 flex items-center justify-between shadow-md">
+    <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-2xl">menu</span>
+        <h1 class="text-xl font-bold tracking-tight">Smart Carpark SG</h1>
+    </div>
+    <div class="flex items-center gap-2">
+        <button class="p-1">
+            <span class="material-symbols-outlined text-2xl">account_circle</span>
+        </button>
+    </div>
+</header>
+
+<main class="flex-1 overflow-y-auto pb-32">
+    <!-- Search Input Section -->
+    <div class="p-4 space-y-4">
+        <div class="space-y-2">
+            <label class="text-sm font-semibold text-slate-500 dark:text-slate-400 ml-1">Destination</label>
+            <div class="relative group">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span class="material-symbols-outlined text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+                </div>
+                <input 
+                    id="destinationInput" 
+                    class="w-full bg-white dark:bg-[#1c2a38] border-none ring-1 ring-slate-200 dark:ring-slate-700 focus:ring-2 focus:ring-primary rounded-xl py-4 pl-10 pr-4 text-base placeholder:text-slate-400 transition-all shadow-sm" 
+                    placeholder="Enter destination (e.g. Orchard MRT)" 
+                    type="text"
+                />
+            </div>
+            <!-- Error message -->
+            <p id="destinationError" class="text-red-500 text-sm ml-1 hidden"></p>
+        </div>
+        
+        <!-- Search Radius -->
+        <div class="pt-2">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-lg font-bold">Search Radius</h2>
+                <span id="radiusDisplay" class="text-primary font-bold text-sm bg-primary/10 px-2 py-1 rounded">1.0 km</span>
+            </div>
+            <div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+                <button data-radius="0.5" class="radius-btn flex-1 min-w-[80px] py-2 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1c2a38] text-sm font-medium hover:bg-slate-50 transition-colors">500m</button>
+                <button data-radius="1" class="radius-btn flex-1 min-w-[80px] py-2 px-4 rounded-lg bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20">1km</button>
+                <button data-radius="2" class="radius-btn flex-1 min-w-[80px] py-2 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1c2a38] text-sm font-medium hover:bg-slate-50 transition-colors">2km</button>
+                <button data-radius="5" class="radius-btn flex-1 min-w-[80px] py-2 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1c2a38] text-sm font-medium hover:bg-slate-50 transition-colors">5km</button>
+            </div>
+        </div>
+        
+        <!-- Filter Preferences Panel -->
+        <div class="mt-6 space-y-6 bg-white dark:bg-[#1c2a38] p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
+            <div class="flex items-center gap-2 border-b border-slate-100 dark:border-slate-700 pb-3">
+                <span class="material-symbols-outlined text-primary">tune</span>
+                <h2 class="text-lg font-bold">Filter Preferences</h2>
+            </div>
+            
+            <!-- Pricing Toggle -->
+            <div class="space-y-3">
+                <label class="text-sm font-bold text-slate-500 dark:text-slate-400">Pricing</label>
+                <div class="grid grid-cols-2 gap-2 bg-slate-100 dark:bg-background-dark p-1 rounded-lg">
+                    <button data-filter="pricing" data-value="Free" class="filter-btn py-2 text-sm font-semibold rounded-md transition-all">Free</button>
+                    <button data-filter="pricing" data-value="Paid" class="filter-btn py-2 text-sm font-bold bg-white dark:bg-[#283b4d] shadow-sm rounded-md text-primary">Paid</button>
+                </div>
+            </div>
+            
+            <!-- Facility Toggle -->
+            <div class="space-y-3">
+                <label class="text-sm font-bold text-slate-500 dark:text-slate-400">Facility Type</label>
+                <div class="grid grid-cols-2 gap-2 bg-slate-100 dark:bg-background-dark p-1 rounded-lg">
+                    <button data-filter="facility" data-value="Open-air" class="filter-btn py-2 text-sm font-semibold rounded-md transition-all">Open-air</button>
+                    <button data-filter="facility" data-value="Sheltered" class="filter-btn py-2 text-sm font-bold bg-white dark:bg-[#283b4d] shadow-sm rounded-md text-primary">Sheltered</button>
+                </div>
+            </div>
+            
+            <!-- Slider for Minimum Lots -->
+            <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                    <label class="text-sm font-bold text-slate-500 dark:text-slate-400">Minimum Available Lots</label>
+                    <span id="minLotsDisplay" class="text-sm font-bold text-primary">15+</span>
+                </div>
+                <div class="relative pt-1">
+                    <input 
+                        id="minLotsSlider" 
+                        class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary" 
+                        max="50" 
+                        min="0" 
+                        type="range" 
+                        value="15"
+                    />
+                    <div class="flex justify-between text-[10px] text-slate-400 mt-2 font-medium">
+                        <span>0</span>
+                        <span>10</span>
+                        <span>20</span>
+                        <span>30</span>
+                        <span>40</span>
+                        <span>50+</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Fixed Bottom CTA -->
+<div class="fixed bottom-0 left-0 right-0 p-4 bg-background-light dark:bg-background-dark border-t border-slate-200 dark:border-slate-800">
+    <button id="findParkingBtn" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/30 flex items-center justify-center gap-2 transition-transform active:scale-[0.98]">
+        <span class="material-symbols-outlined">map</span>
+        Find Parking
+    </button>
+    <div class="h-6 w-32 bg-slate-300 dark:bg-slate-700 mx-auto mt-4 rounded-full opacity-20 hidden ios-home-indicator"></div>
+</div>
+
+<!-- Map Preview Placeholder (Subtle) -->
+<div class="fixed top-0 left-0 w-full h-full -z-10 opacity-10 dark:opacity-5 pointer-events-none">
+    <img class="w-full h-full object-cover" data-alt="A clean top down map view of Singapore city streets" data-location="Singapore" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxQvcvGyYcVW6F-XpqlQPnsltaXM2TZkHbqywHe0LYuTxWvfU91_Vii3dOXOgH_De4OoYPqV9qz8YGFqkc8drSP6QcEBgV-ODnttdApNZIoCa2j3HqRe5hZwONkvvO4PCsy1hcDK0MmuCq360_HihvSGsrb9Lnwr1sGo2lhVhv-Tqvkb1XQv1nr-2EjKLPQe8s0kZQO3eXwHFYlQdvRBB3_CcHE9KREEzKySSTu5bD6DvJZO8HiRphn3p8ZhVG4HhgTf2swESQkrw8"/>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/mockData.js"></script>
+<script>
+    // Search page functionality
+    let searchRadius = 1.0;
+    let filters = {
+        pricing: 'Paid',
+        facility: 'Sheltered',
+        minLots: 15
+    };
+    
+    // Radius selection
+    document.querySelectorAll('.radius-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.radius-btn').forEach(b => {
+                b.classList.remove('bg-primary', 'text-white', 'shadow-lg', 'shadow-primary/20');
+                b.classList.add('border', 'border-slate-200', 'dark:border-slate-700', 'bg-white', 'dark:bg-[#1c2a38]');
+            });
+            this.classList.add('bg-primary', 'text-white', 'shadow-lg', 'shadow-primary/20');
+            this.classList.remove('border', 'border-slate-200', 'dark:border-slate-700', 'bg-white', 'dark:bg-[#1c2a38]');
+            searchRadius = parseFloat(this.dataset.radius);
+            document.getElementById('radiusDisplay').textContent = searchRadius < 1 ? `${(searchRadius * 1000).toFixed(0)}m` : `${searchRadius.toFixed(1)} km`;
+        });
+    });
+    
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const filterType = this.dataset.filter;
+            const filterValue = this.dataset.value;
+            
+            // Update active state
+            const siblings = Array.from(this.parentElement.children);
+            siblings.forEach(s => {
+                s.classList.remove('bg-white', 'dark:bg-[#283b4d]', 'shadow-sm', 'text-primary', 'font-bold');
+                s.classList.add('font-semibold');
+            });
+            this.classList.add('bg-white', 'dark:bg-[#283b4d]', 'shadow-sm', 'text-primary', 'font-bold');
+            this.classList.remove('font-semibold');
+            
+            filters[filterType] = filterValue;
+        });
+    });
+    
+    // Min lots slider
+    const minLotsSlider = document.getElementById('minLotsSlider');
+    minLotsSlider.addEventListener('input', function() {
+        const value = parseInt(this.value);
+        filters.minLots = value;
+        document.getElementById('minLotsDisplay').textContent = value > 0 ? `${value}+` : '0';
+    });
+    
+    // Find parking button
+    document.getElementById('findParkingBtn').addEventListener('click', function() {
+        const destination = document.getElementById('destinationInput').value.trim();
+        const errorEl = document.getElementById('destinationError');
+        
+        // Validation
+        if (!destination) {
+            App.showError(errorEl, 'Please enter a destination');
+            return;
+        }
+        
+        // Check if destination exists (mock check)
+        const validDestinations = mockDestinations.map(d => d.toLowerCase());
+        if (!validDestinations.some(d => destination.toLowerCase().includes(d) || d.includes(destination.toLowerCase()))) {
+            App.showError(errorEl, 'Destination not found. Try: Orchard Road, Marina Bay, VivoCity');
+            return;
+        }
+        
+        // Store filters and navigate
+        sessionStorage.setItem('searchFilters', JSON.stringify({
+            destination,
+            radius: searchRadius,
+            filters
+        }));
+        
+        App.navigateTo('results.html');
+    });
+    
+    // Clear error on input
+    document.getElementById('destinationInput').addEventListener('input', function() {
+        App.hideError(document.getElementById('destinationError'));
+    });
+</script>
+</body>
+</html>
