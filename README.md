@@ -17,7 +17,3 @@
 - `js/` - JavaScript files
 <<<<<<< HEAD
 - `mockups/` - Static UI mockup screenshots
-
-
-=======
->>>>>>> f34b57a4ed4625e85f20b14c6c02983dba867a7a
