@@ -1,4 +1,4 @@
-# Setup
+# Smart Carpark Availability & Analytics System (Singapore)
 
 ## Quick Start
 
