@@ -15,10 +15,6 @@
 - `navigation.html` - Navigation page
 - `analytics.html` - Analytics page
 - `js/` - JavaScript files
+- `mockups/` - Static UI mockup screenshots
 
-## Technologies
 
-- Plain HTML
-- Tailwind CSS (CDN)
-- Vanilla JavaScript
-- Material Icons
