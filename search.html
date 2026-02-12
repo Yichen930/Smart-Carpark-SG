@@ -53,8 +53,8 @@
 <!-- Top Navigation Bar -->
 <header class="sticky top-0 z-50 bg-primary text-white px-4 py-4 flex items-center justify-between shadow-md">
     <div class="flex items-center gap-3">
-        <span class="material-symbols-outlined text-2xl">menu</span>
-        <h1 class="text-xl font-bold tracking-tight">Smart Carpark SG</h1>
+    
+        <h1 class="text-lg font-bold tracking-tight">Smart Carpark SG</h1>
     </div>
     <div class="flex items-center gap-2">
         <button class="p-1">
@@ -87,26 +87,28 @@
         <div class="pt-2">
             <div class="flex justify-between items-center mb-3">
                 <h2 class="text-lg font-bold">Search Radius</h2>
-                <span id="radiusDisplay" class="text-primary font-bold text-sm bg-primary/10 px-2 py-1 rounded">1.0 km</span>
+                <span id="radiusDisplay" class="text-primary font-semibold text-sm bg-primary/10 px-2 py-1 rounded">1.0 km</span>
             </div>
             <div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
-                <button data-radius="0.5" class="radius-btn flex-1 min-w-[80px] py-2 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1c2a38] text-sm font-medium hover:bg-slate-50 transition-colors">500m</button>
-                <button data-radius="1" class="radius-btn flex-1 min-w-[80px] py-2 px-4 rounded-lg bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20">1km</button>
-                <button data-radius="2" class="radius-btn flex-1 min-w-[80px] py-2 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1c2a38] text-sm font-medium hover:bg-slate-50 transition-colors">2km</button>
-                <button data-radius="5" class="radius-btn flex-1 min-w-[80px] py-2 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1c2a38] text-sm font-medium hover:bg-slate-50 transition-colors">5km</button>
+                <button data-radius="0.2" class="radius-btn flex-1 min-w-[80px] py-2 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1c2a38] text-sm font-medium hover:bg-slate-50 transition-colors">200m</button>
+                <button data-radius="0.4" class="radius-btn flex-1 min-w-[80px] py-2 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1c2a38] text-sm font-medium hover:bg-slate-50 transition-colors">400m</button>
+                <button data-radius="0.6" class="radius-btn flex-1 min-w-[80px] py-2 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1c2a38] text-sm font-medium hover:bg-slate-50 transition-colors">600m</button>
+                <button data-radius="0.8" class="radius-btn flex-1 min-w-[80px] py-2 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1c2a38] text-sm font-medium hover:bg-slate-50 transition-colors">800m</button>
+                <button data-radius="1" class="radius-btn flex-1 min-w-[80px] py-2 px-4 rounded-lg bg-primary text-white text-sm font-semibold shadow-lg shadow-primary/20">1km</button>
+                <button data-radius="1.2" class="radius-btn flex-1 min-w-[80px] py-2 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1c2a38] text-sm font-medium hover:bg-slate-50 transition-colors">1.2km</button>
             </div>
         </div>
         
         <!-- Filter Preferences Panel -->
         <div class="mt-6 space-y-6 bg-white dark:bg-[#1c2a38] p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
             <div class="flex items-center gap-2 border-b border-slate-100 dark:border-slate-700 pb-3">
-                <span class="material-symbols-outlined text-primary">tune</span>
+
                 <h2 class="text-lg font-bold">Filter Preferences</h2>
             </div>
             
             <!-- Pricing Toggle -->
             <div class="space-y-3">
-                <label class="text-sm font-bold text-slate-500 dark:text-slate-400">Pricing</label>
+                <label class="text-sm font-semibold text-slate-500 dark:text-slate-400">Pricing</label>
                 <div class="grid grid-cols-2 gap-2 bg-slate-100 dark:bg-background-dark p-1 rounded-lg">
                     <button data-filter="pricing" data-value="Free" class="filter-btn py-2 text-sm font-semibold rounded-md transition-all">Free</button>
                     <button data-filter="pricing" data-value="Paid" class="filter-btn py-2 text-sm font-bold bg-white dark:bg-[#283b4d] shadow-sm rounded-md text-primary">Paid</button>
@@ -115,7 +117,7 @@
             
             <!-- Facility Toggle -->
             <div class="space-y-3">
-                <label class="text-sm font-bold text-slate-500 dark:text-slate-400">Facility Type</label>
+                <label class="text-sm font-semibold text-slate-500 dark:text-slate-400">Facility Type</label>
                 <div class="grid grid-cols-2 gap-2 bg-slate-100 dark:bg-background-dark p-1 rounded-lg">
                     <button data-filter="facility" data-value="Open-air" class="filter-btn py-2 text-sm font-semibold rounded-md transition-all">Open-air</button>
                     <button data-filter="facility" data-value="Sheltered" class="filter-btn py-2 text-sm font-bold bg-white dark:bg-[#283b4d] shadow-sm rounded-md text-primary">Sheltered</button>
@@ -125,8 +127,8 @@
             <!-- Slider for Minimum Lots -->
             <div class="space-y-4">
                 <div class="flex justify-between items-center">
-                    <label class="text-sm font-bold text-slate-500 dark:text-slate-400">Minimum Available Lots</label>
-                    <span id="minLotsDisplay" class="text-sm font-bold text-primary">15+</span>
+                    <label class="text-sm font-semibold text-slate-500 dark:text-slate-400">Minimum Available Lots</label>
+                    <span id="minLotsDisplay" class="text-sm font-semibold text-primary">15+</span>
                 </div>
                 <div class="relative pt-1">
                     <input 
@@ -137,7 +139,7 @@
                         type="range" 
                         value="15"
                     />
-                    <div class="flex justify-between text-[10px] text-slate-400 mt-2 font-medium">
+                    <div class="flex justify-between text-[10px] font-semibold text-slate-400 mt-2">
                         <span>0</span>
                         <span>10</span>
                         <span>20</span>
@@ -153,8 +155,8 @@
 
 <!-- Fixed Bottom CTA -->
 <div class="fixed bottom-0 left-0 right-0 p-4 bg-background-light dark:bg-background-dark border-t border-slate-200 dark:border-slate-800">
-    <button id="findParkingBtn" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/30 flex items-center justify-center gap-2 transition-transform active:scale-[0.98]">
-        <span class="material-symbols-outlined">map</span>
+    <button id="findParkingBtn" class="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-4 rounded-xl shadow-lg shadow-primary/30 flex items-center justify-center gap-2 transition-transform active:scale-[0.98]">
+       
         Find Parking
     </button>
     <div class="h-6 w-32 bg-slate-300 dark:bg-slate-700 mx-auto mt-4 rounded-full opacity-20 hidden ios-home-indicator"></div>
@@ -186,7 +188,7 @@
             this.classList.add('bg-primary', 'text-white', 'shadow-lg', 'shadow-primary/20');
             this.classList.remove('border', 'border-slate-200', 'dark:border-slate-700', 'bg-white', 'dark:bg-[#1c2a38]');
             searchRadius = parseFloat(this.dataset.radius);
-            document.getElementById('radiusDisplay').textContent = searchRadius < 1 ? `${(searchRadius * 1000).toFixed(0)}m` : `${searchRadius.toFixed(1)} km`;
+            document.getElementById('radiusDisplay').textContent = searchRadius < 1 ? `${Math.round(searchRadius * 1000)}m` : `${searchRadius.toFixed(1)} km`;
         });
     });
     
